@@ -17,15 +17,15 @@
       </ng-container>
       <ng-container matColumnDef="totalValue">
         <mat-header-cell *matHeaderCellDef> Valor Total </mat-header-cell>:
-        <mat-cell *matCellDef="let element"> {{element.totalValue}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.totalValue | currency:'BRL'}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="totalPaid">
         <mat-header-cell  *matHeaderCellDef> Valor Pago </mat-header-cell>
-        <mat-cell  *matCellDef="let element"> {{element.totalPaid}} </mat-cell>
+        <mat-cell  *matCellDef="let element"> {{element.totalPaid | currency:'BRL'}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">
         <mat-header-cell  *matHeaderCellDef> Status </mat-header-cell>
-        <mat-cell  *matCellDef="let element"> {{element.status}} </mat-cell>
+        <mat-cell  *matCellDef="let element"> <strong>{{element.status}}</strong> </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">
         <mat-header-cell  *matHeaderCellDef> Ações </mat-header-cell>
@@ -49,9 +49,19 @@
 </mat-tab-group>
 
 <div id="footer">
-  <p>Previsão de gastos: {{spendingForecast()}}</p>
-  <p>Total Pago: {{totalPaid()}}</p>
-  <p>Total de Receitas: {{totalIncome}}</p>
-  <p>Disponivel: {{totalIncome - spendingForecast()}}</p>
-  <p>Atual em contas: {{totalIncome - totalPaid()}}</p>
+  <div fxFlex class="container-footer">
+    <div class="content-footer" >Previsão de gastos: {{spendingForecast() | currency:'BRL'}}</div>
+  </div>
+  <div fxFlex class="container-footer">
+    <div class="content-footer" >Total Pago: {{totalPaid() | currency:'BRL'}}</div>
+  </div>
+  <div fxFlex class="container-footer">
+    <div class="content-footer" >Total de Receitas: {{totalIncome | currency:'BRL'}}</div>
+  </div>
+  <div fxFlex class="container-footer">
+    <div class="content-footer" >Disponivel: {{totalIncome - spendingForecast() | currency:'BRL'}}</div>
+  </div>
+  <div fxFlex class="container-footer">
+    <div class="content-footer" >Atual em contas: {{totalIncome - totalPaid() | currency:'BRL'}}</div>
+  </div>
 </div>

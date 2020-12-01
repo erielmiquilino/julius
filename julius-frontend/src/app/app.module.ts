@@ -23,6 +23,7 @@ import { CreditCardComponent } from './credit-card/credit-card.component';
 import {AppRoutingModule} from './app.routing,module';
 import { IncomeItemComponent } from './incomes/income-item/income-item.component';
 import { CreditCardItemComponent } from './credit-card/credit-card-item/credit-card-item.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { CreditCardItemComponent } from './credit-card/credit-card-item/credit-c
     IncomesComponent,
     CreditCardComponent,
     IncomeItemComponent,
-    CreditCardItemComponent,
+    CreditCardItemComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +51,7 @@ import { CreditCardItemComponent } from './credit-card/credit-card-item/credit-c
     MatDatepickerModule,
     MatMomentDateModule,
     FormsModule,
+    FlexLayoutModule,
     AppRoutingModule
   ],
   providers: [{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}],

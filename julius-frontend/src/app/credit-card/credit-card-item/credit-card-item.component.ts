@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {CreditCard} from './credit-card';
 
 @Component({
   selector: 'app-credit-card-item',
   templateUrl: './credit-card-item.component.html',
   styleUrls: ['./credit-card-item.component.css']
 })
-export class CreditCardItemComponent implements OnInit {
+export class CreditCardItemComponent {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<CreditCardItemComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: CreditCard) {}
 
-  ngOnInit(): void {
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

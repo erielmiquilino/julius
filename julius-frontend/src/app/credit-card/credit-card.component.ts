@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {ExpenseItem} from '../expenses/expense-item/expense-item';
-import {ExpenseItemComponent} from '../expenses/expense-item/expense-item.component';
 import {PaymentActionComponent} from '../payment-action/payment-action.component';
 import {PaymentAction} from '../payment-action/PaymentAction';
 import {AlertComponent} from '../alert/alert.component';
+import {CreditCard} from './credit-card-item/credit-card';
+import {CreditCardItemComponent} from './credit-card-item/credit-card-item.component';
 
 @Component({
   selector: 'app-credit-card',
@@ -15,12 +15,12 @@ export class CreditCardComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  displayedColumns: string[] = ['billingDate', 'description', 'totalValue', 'totalPaid', 'status', 'action'];
+  displayedColumns: string[] = ['date', 'description', 'totalValue', 'action'];
 
-  dataSource: ExpenseItem[] = [
-    {billingDate: 'Dia 10', description: 'Emprestimo Banco da Familia', totalValue: 163.39, totalPaid: 163.39, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Internet Claro Fixo', totalValue: 79.99, totalPaid: 79.99, status: 'PENDENTE'}
+  dataSource: CreditCard[] = [
+    {date: 'Dia 10', description: 'Amazon Prime', totalValue: 163.39, comments: ''},
+    {date: 'Dia 10', description: 'Netflix', totalValue: 217.60, comments: ''},
+    {date: 'Dia 10', description: 'Compras Miguel ', totalValue: 79.99, comments: ''}
   ];
 
   animal: string;
@@ -29,10 +29,10 @@ export class CreditCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openFinancialItemDialog(): void {
-    const dialogRef = this.dialog.open(ExpenseItemComponent, {
+  openCreditCardItemDialog(): void {
+    const dialogRef = this.dialog.open(CreditCardItemComponent, {
       width: '250px',
-      data: new ExpenseItem()
+      data: new CreditCard()
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -57,4 +57,7 @@ export class CreditCardComponent implements OnInit {
     this.dialog.open(AlertComponent, {});
   }
 
+  total(): number {
+    return this.dataSource.reduce((x, {totalValue}) => x + totalValue, 0 );
+  }
 }
