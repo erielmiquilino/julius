@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Pagamento</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Dia do pagamento</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.paymentDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Valor</mat-label>
+    <input matInput [(ngModel)]="data.value">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data">Inserir</button>
+</div>

@@ -1,0 +1,57 @@
+<mat-tab-group>
+  <mat-tab label="Outubro/2020">
+
+    <button mat-button (click)="openFinancialItemDialog()" >
+      Novo
+      <mat-icon>playlist_add</mat-icon>
+    </button>
+
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="billingDate">
+        <mat-header-cell  *matHeaderCellDef>Dia do Ven/Pag</mat-header-cell>
+        <mat-cell  *matCellDef="let element"> {{element.billingDate}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell  *matHeaderCellDef> Descrição </mat-header-cell>
+        <mat-cell  *matCellDef="let element"> {{element.description}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="totalValue">
+        <mat-header-cell *matHeaderCellDef> Valor Total </mat-header-cell>:
+        <mat-cell *matCellDef="let element"> {{element.totalValue}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="totalPaid">
+        <mat-header-cell  *matHeaderCellDef> Valor Pago </mat-header-cell>
+        <mat-cell  *matCellDef="let element"> {{element.totalPaid}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell  *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell  *matCellDef="let element"> {{element.status}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell  *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell  *matCellDef="let element">
+          <button (click)="openPaymentActionDialog()" mat-icon-button [disabled]="element.status === 'PAGO'" >
+            <mat-icon>payments</mat-icon>
+          </button>
+          <button (click)="openAlertDialog()" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-tab>
+  <mat-tab label="Novembro/2020"> Content 2 </mat-tab>
+  <mat-tab label="Dezembro/2020"> Content 3 </mat-tab>
+  <mat-tab label="Janeiro/2021"> Content 3 </mat-tab>
+</mat-tab-group>
+
+<div class="footer">
+  <p>Previsão de gastos: {{spendingForecast()}}</p>
+  <p>Total Pago: {{totalPaid()}}</p>
+  <p>Total de Receitas: {{totalIncome}}</p>
+  <p>Disponivel: {{totalIncome - spendingForecast()}}</p>
+  <p>Atual em contas: {{totalIncome - totalPaid()}}</p>
+</div>
