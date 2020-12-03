@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using Julius.CrossCutting.Extensions;
 using Julius.Domain.Contracts.Repositories;
 using Julius.Domain.Contracts.Services;
-using Julius.Domain.Domains;
 using Julius.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Julius.Service.Services
 {
@@ -20,38 +22,28 @@ namespace Julius.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<Expense> Get(Guid id)
-        {
-            return await _repository.SelectAsync(id);
-        }
-
-        public async Task<IEnumerable<ExpenseModel>> GetAll()
-        {
-            var expenses = await _repository.SelectAsync();
-
-            return _mapper.Map<IEnumerable<ExpenseModel>>(expenses);
-        }
-
-        public async Task<Expense> Post(Expense product)
-        {
-            return await _repository.InsertAsync(product);
-        }
-
-        public async Task<Expense> Put(Expense product)
-        {
-            return await _repository.UpdateAsync(product);
-        }
-
-        public async Task<bool> Delete(Guid id)
-        {
-            return await _repository.DeleteAsync(id);
-        }
-
         public async Task<IEnumerable<MonthModel>> GetMonthsWithRecords()
         {
             var months = await _repository.GetMonths();
 
-            return _mapper.Map<IEnumerable<MonthModel>>(months);
+            if (months.Any())
+                return _mapper.Map<IEnumerable<MonthModel>>(months);
+
+            var now = DateTime.Now;
+            var cultureInfo = new CultureInfo("pt-BR");
+
+            return new List<MonthModel>() {new MonthModel()
+            {
+                Year = now.Year.ToString(),
+                Month = now.ToString("MMMM", cultureInfo).FirstCharToUpper()
+            }};
+        }
+
+        public async Task<IEnumerable<ExpenseModel>> GetExpensesByMonthAndYear(string month, string year)
+        {
+            var expenses = await _repository.SelectByMonthAndYear(month, year);
+
+            return _mapper.Map<IEnumerable<ExpenseModel>>(expenses);
         }
     }
 }

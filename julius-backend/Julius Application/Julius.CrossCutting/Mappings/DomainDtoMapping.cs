@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Julius.Domain.Domains;
 using Julius.Domain.DTOs;
-using Julius.Domain.Models;
 
 namespace Julius.CrossCutting.Mappings
 {
@@ -10,6 +9,9 @@ namespace Julius.CrossCutting.Mappings
         public DomainDtoMapping()
         {
             CreateMap<MonthDto, Expense>()
+                .ReverseMap();
+
+            CreateMap<ExpenseDto, Expense>()
                 .ReverseMap();
         }
     }

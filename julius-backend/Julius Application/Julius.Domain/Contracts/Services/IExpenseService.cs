@@ -8,16 +8,8 @@ namespace Julius.Domain.Contracts.Services
 {
     public interface IExpenseService
     {
-        Task<Expense> Get(Guid id);
-
-        Task<IEnumerable<ExpenseModel>> GetAll();
-
-        Task<Expense> Post(Expense product);
-
-        Task<Expense> Put(Expense product);
-
-        Task<bool> Delete(Guid id);
-
         Task<IEnumerable<MonthModel>> GetMonthsWithRecords();
+
+        Task<IEnumerable<ExpenseModel>> GetExpensesByMonthAndYear(string month, string year);
     }
 }

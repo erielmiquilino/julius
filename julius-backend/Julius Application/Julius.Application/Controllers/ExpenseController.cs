@@ -20,15 +20,15 @@ namespace Julius.Application.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ExpenseModel>>> GetExpenses()
+        [HttpGet("GetExpensesByMonthAndYear/{month}/{year}")]
+        public async Task<ActionResult<IEnumerable<ExpenseModel>>> GetExpensesBy(string month, string year)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                return Ok(await _service.GetAll());
+                return Ok(await _service.GetExpensesByMonthAndYear(month, year));
             }
             catch (ArgumentException ex)
             {
@@ -36,6 +36,7 @@ namespace Julius.Application.Controllers
             }
         }
 
+        [HttpGet("GetMonths")]
         public async Task<ActionResult<IEnumerable<MonthModel>>> GetMonthsWithRecords()
         {
             if (!ModelState.IsValid)

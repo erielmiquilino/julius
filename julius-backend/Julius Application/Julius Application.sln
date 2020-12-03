@@ -15,15 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Cross Cutting", "4.1 - Cross Cutting", "{42584CE8-FAEE-4618-B381-4D9F6DB6F7C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Julius.CrossCutting", "Julius.CrossCutting\Julius.CrossCutting.csproj", "{C3C0C4AF-97E4-4055-BC67-48442B530D66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Julius.CrossCutting", "Julius.CrossCutting\Julius.CrossCutting.csproj", "{C3C0C4AF-97E4-4055-BC67-48442B530D66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Service", "3 - Service", "{FE325257-DC82-4CD5-80C6-6F30CBA50C81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Julius.Service", "Julius.Service\Julius.Service.csproj", "{F163B084-9090-45F5-BD38-F7751910D335}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Julius.Service", "Julius.Service\Julius.Service.csproj", "{F163B084-9090-45F5-BD38-F7751910D335}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{7B9275A0-0914-4459-B95C-E0AFD3CC8832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Julius.Application", "Julius.Application\Julius.Application.csproj", "{F3DB57D8-6C63-423A-95CE-3C742D6DDF59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Julius.Application", "Julius.Application\Julius.Application.csproj", "{F3DB57D8-6C63-423A-95CE-3C742D6DDF59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.3 - Common", "4.3 - Common", "{EBBC1A25-2E79-4F2D-AB12-5302E4A2727E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Julius.Common", "Julius.Common\Julius.Common.csproj", "{3751D5BB-E54C-4F0E-882C-684384A86E02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{F3DB57D8-6C63-423A-95CE-3C742D6DDF59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3DB57D8-6C63-423A-95CE-3C742D6DDF59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3DB57D8-6C63-423A-95CE-3C742D6DDF59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3751D5BB-E54C-4F0E-882C-684384A86E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3751D5BB-E54C-4F0E-882C-684384A86E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3751D5BB-E54C-4F0E-882C-684384A86E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3751D5BB-E54C-4F0E-882C-684384A86E02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +71,8 @@ Global
 		{C3C0C4AF-97E4-4055-BC67-48442B530D66} = {42584CE8-FAEE-4618-B381-4D9F6DB6F7C2}
 		{F163B084-9090-45F5-BD38-F7751910D335} = {FE325257-DC82-4CD5-80C6-6F30CBA50C81}
 		{F3DB57D8-6C63-423A-95CE-3C742D6DDF59} = {7B9275A0-0914-4459-B95C-E0AFD3CC8832}
+		{EBBC1A25-2E79-4F2D-AB12-5302E4A2727E} = {E9288844-96D9-408C-A949-C53FB39DA5A3}
+		{3751D5BB-E54C-4F0E-882C-684384A86E02} = {EBBC1A25-2E79-4F2D-AB12-5302E4A2727E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2C11AD9-4FF8-4C7C-8A41-06C274455C52}
