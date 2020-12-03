@@ -48,7 +48,45 @@ namespace Julius.Application.Controllers
             }
             catch (ArgumentException ex)
             {
-                return StatusCode((int) HttpStatusCode.InternalServerError, ex);
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Expense>> PostExpense([FromBody] CreateExpenseModel createExpenseModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var expense = await _service.Post(createExpenseModel);
+
+                if (expense != null)
+                    return CreatedAtAction("GetExpense", new { id = expense.Id }, expense);
+
+                return BadRequest();
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ExpenseModel>> GetExpense(Guid id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                return Ok(await _service.Get(id));
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
         }
 

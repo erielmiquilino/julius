@@ -11,5 +11,9 @@ namespace Julius.Domain.Contracts.Services
         Task<IEnumerable<MonthModel>> GetMonthsWithRecords();
 
         Task<IEnumerable<ExpenseModel>> GetExpensesByMonthAndYear(string month, string year);
+        
+        Task<Expense> Post(CreateExpenseModel createExpenseModel);
+
+        Task<ExpenseModel> Get(Guid id);
     }
 }

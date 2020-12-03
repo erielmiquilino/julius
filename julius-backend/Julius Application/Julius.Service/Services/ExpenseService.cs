@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Julius.CrossCutting.Extensions;
 using Julius.Domain.Contracts.Repositories;
 using Julius.Domain.Contracts.Services;
 using Julius.Domain.Models;
@@ -8,6 +7,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Julius.Common.Extensions;
+using Julius.Domain.Domains;
 
 namespace Julius.Service.Services
 {
@@ -44,6 +45,20 @@ namespace Julius.Service.Services
             var expenses = await _repository.SelectByMonthAndYear(month, year);
 
             return _mapper.Map<IEnumerable<ExpenseModel>>(expenses);
+        }
+
+        public async Task<ExpenseModel> Get(Guid id)
+        {
+            var entity = await _repository.SelectAsync(id);
+
+            return _mapper.Map<ExpenseModel>(entity);
+        }
+
+        public async Task<Expense> Post(CreateExpenseModel createExpenseModel)
+        {
+            var expense = _mapper.Map<Expense>(createExpenseModel);
+
+            return await _repository.InsertAsync(expense);
         }
     }
 }

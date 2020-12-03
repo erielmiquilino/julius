@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Julius.CrossCutting.Extensions
+namespace Julius.Common.Extensions
 {
     public static class StringExtensions
     {
