@@ -1,8 +1,8 @@
 ﻿using Julius.Domain.Domains;
+using Julius.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Julius.Domain.Models;
 
 namespace Julius.Domain.Contracts.Services
 {
@@ -18,6 +18,6 @@ namespace Julius.Domain.Contracts.Services
 
         Task<bool> Delete(Guid id);
 
-        Task<MonthModel> GetMonthsWithRecords();
+        Task<IEnumerable<MonthModel>> GetMonthsWithRecords();
     }
 }

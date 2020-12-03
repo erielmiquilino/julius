@@ -1,4 +1,5 @@
 ﻿using Julius.Data.Context;
+using Julius.Data.Repositories;
 using Julius.Data.Repositories.Base;
 using Julius.Domain.Contracts.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace Julius.CrossCutting.DependencyInjection
             );
 
             serviceDescriptors.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            serviceDescriptors.AddScoped<IExpenseRepository, ExpenseRepository>();
         }
     }
 }

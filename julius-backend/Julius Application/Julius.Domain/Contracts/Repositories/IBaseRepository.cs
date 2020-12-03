@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Julius.Domain.Domains.Base;
+using Julius.Domain.Models;
 
 namespace Julius.Domain.Contracts.Repositories
 {

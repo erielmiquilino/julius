@@ -11,10 +11,10 @@ namespace Julius.Service.Services
 {
     public class ExpenseService : IExpenseService
     {
-        private readonly IBaseRepository<Expense> _repository;
+        private readonly IExpenseRepository _repository;
         private readonly IMapper _mapper;
 
-        public ExpenseService(IBaseRepository<Expense> repository, IMapper mapper)
+        public ExpenseService(IExpenseRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -47,10 +47,11 @@ namespace Julius.Service.Services
             return await _repository.DeleteAsync(id);
         }
 
-        public async Task<MonthModel> GetMonthsWithRecords()
+        public async Task<IEnumerable<MonthModel>> GetMonthsWithRecords()
         {
+            var months = await _repository.GetMonths();
 
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<MonthModel>>(months);
         }
     }
 }

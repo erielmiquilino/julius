@@ -20,6 +20,8 @@ namespace Julius.Application
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new DomainModelMapping());
+                cfg.AddProfile(new DtoModelMapping());
+                cfg.AddProfile(new DomainDtoMapping());
             });
 
             var mapper = config.CreateMapper();
