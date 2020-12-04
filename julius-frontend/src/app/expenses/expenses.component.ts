@@ -5,6 +5,8 @@ import {ExpenseItemComponent} from './expense-item/expense-item.component';
 import {PaymentActionComponent} from '../payment-action/payment-action.component';
 import {PaymentAction} from '../payment-action/PaymentAction';
 import {AlertComponent} from '../alert/alert.component';
+import {ExpenseService} from './expense-item/expense.service';
+import {Month} from './expense-item/month';
 
 @Component({
   selector: 'app-expenses',
@@ -13,45 +15,25 @@ import {AlertComponent} from '../alert/alert.component';
 })
 export class ExpensesComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              public expenseService: ExpenseService) {}
 
-  displayedColumns: string[] = ['billingDate', 'description', 'totalValue', 'totalPaid', 'status', 'action'];
+  public displayedColumns: string[] = ['billingDate', 'description', 'totalValue', 'totalPaid', 'status', 'action'];
 
-  totalIncome = 50000;
+  public totalIncome = 50000;
 
-  dataSource: ExpenseItem[] = [
-    {billingDate: 'Dia 10', description: 'Emprestimo Banco da Familia', totalValue: 163.39, totalPaid: 163.39, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Emprestimo Ailos (21/36)', totalValue: 217.60, totalPaid: 217.60, status: 'PAGO'},
-    {billingDate: 'Dia 10', description: 'Internet Claro Fixo', totalValue: 79.99, totalPaid: 79.99, status: 'PENDENTE'}
-  ];
+  public dataSource: ExpenseItem[];
 
-  animal: string;
-  name: string;
+  public months: Month[];
 
   ngOnInit(): void {
+
+    this.expenseService.getMonths().subscribe(response => {
+      this.months = response;
+      this.expenseService.getExpensesByMonthAndYear(response[0].month, response[0].year).subscribe(expenses => {
+        this.dataSource = expenses;
+      });
+    });
   }
 
   openFinancialItemDialog(): void {
@@ -60,9 +42,13 @@ export class ExpensesComponent implements OnInit {
       data: new ExpenseItem()
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+    dialogRef.afterClosed().subscribe(expense => {
+      expense.month = this.months[0].month;
+      expense.year = this.months[0].year;
+
+      this.expenseService.postExpense(expense).subscribe(result => {
+        this.dataSource.push(result);
+      });
     });
   }
 
@@ -74,7 +60,6 @@ export class ExpensesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 
@@ -83,10 +68,13 @@ export class ExpensesComponent implements OnInit {
   }
 
   spendingForecast(): number {
-    return this.dataSource.reduce((x, {totalValue}) => x + totalValue, 0);
+    // return this.dataSource.reduce((x, {totalValue}) => x + totalValue, 0);
+    return 0;
   }
 
   totalPaid(): number {
-    return this.dataSource.reduce((x, {totalPaid}) => x + totalPaid, 0);
+    // return this.dataSource.reduce((x, {totalPaid}) => x + totalPaid, 0);
+    return 0;
   }
 }
+

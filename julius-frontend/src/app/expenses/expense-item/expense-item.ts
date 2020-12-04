@@ -4,5 +4,6 @@ export class ExpenseItem {
   totalValue: number;
   totalPaid: number;
   status: string;
-  repeat?: number;
+  month: string;
+  year: string;
 }

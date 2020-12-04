@@ -24,6 +24,7 @@ import {AppRoutingModule} from './app.routing,module';
 import { IncomeItemComponent } from './incomes/income-item/income-item.component';
 import { CreditCardItemComponent } from './credit-card/credit-card-item/credit-card-item.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatMomentDateModule,
     FormsModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}],
   bootstrap: [AppComponent]
