@@ -4,14 +4,16 @@ using Julius.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Julius.Data.Migrations
 {
     [DbContext(typeof(JuliusContext))]
-    partial class JuliusContextModelSnapshot : ModelSnapshot
+    [Migration("20201204062917_ajuste_na_precisao_de_decimais")]
+    partial class ajuste_na_precisao_de_decimais
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -10,6 +10,8 @@ namespace Julius.Application
 {
     public class Startup
     {
+        private const string AllowOrigins = "_allowOrigins";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -27,6 +29,16 @@ namespace Julius.Application
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: AllowOrigins, builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
         }
 
@@ -39,6 +51,7 @@ namespace Julius.Application
             }
 
             app.UseRouting();
+            app.UseCors(AllowOrigins);
 
             app.UseEndpoints(endpoints =>
             {

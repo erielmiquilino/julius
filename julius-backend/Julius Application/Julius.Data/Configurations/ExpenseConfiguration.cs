@@ -14,11 +14,11 @@ namespace Julius.Data.Configurations
 
             builder.Property(p => p.TotalValue)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(10, 2);
 
             builder.Property(p => p.TotalPaid)
                 .IsRequired()
-                .HasPrecision(2);
+                .HasPrecision(10, 2);
 
             builder.Property(p => p.Status)
                 .IsRequired();

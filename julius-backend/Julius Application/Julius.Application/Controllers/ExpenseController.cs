@@ -52,7 +52,7 @@ namespace Julius.Application.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("AddExpense")]
         public async Task<ActionResult<Expense>> PostExpense([FromBody] CreateExpenseModel createExpenseModel)
         {
             if (!ModelState.IsValid)
