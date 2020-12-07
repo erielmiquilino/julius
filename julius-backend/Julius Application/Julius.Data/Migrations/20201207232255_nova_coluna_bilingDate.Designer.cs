@@ -4,14 +4,16 @@ using Julius.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Julius.Data.Migrations
 {
     [DbContext(typeof(JuliusContext))]
-    partial class JuliusContextModelSnapshot : ModelSnapshot
+    [Migration("20201207232255_nova_coluna_bilingDate")]
+    partial class nova_coluna_bilingDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
