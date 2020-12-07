@@ -58,6 +58,8 @@ namespace Julius.Service.Services
         {
             var expense = _mapper.Map<Expense>(createExpenseModel);
 
+            expense.UpdateExpenseStatus();
+
             return await _repository.InsertAsync(expense);
         }
     }

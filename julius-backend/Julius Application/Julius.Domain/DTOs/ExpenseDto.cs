@@ -5,7 +5,10 @@ namespace Julius.Domain.DTOs
 {
     public class ExpenseDto
     {
+
         public Guid Id { get; set; }
+
+        public string BillingDate { get; set; }
 
         public string Description { get; set; }
 

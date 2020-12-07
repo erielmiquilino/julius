@@ -7,6 +7,8 @@ namespace Julius.Domain.Models
 {
     public class CreateExpenseModel
     {
+        public string BillingDate { get; set; }
+
         public string Description { get; set; }
 
         public decimal TotalValue { get; set; }

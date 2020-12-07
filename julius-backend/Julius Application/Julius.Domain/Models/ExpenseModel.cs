@@ -7,6 +7,8 @@ namespace Julius.Domain.Models
     {
         public Guid Id { get; set; }
 
+        public string BillingDate { get; set; }
+
         public string Description { get; set; }
 
         public decimal TotalValue { get; set; }

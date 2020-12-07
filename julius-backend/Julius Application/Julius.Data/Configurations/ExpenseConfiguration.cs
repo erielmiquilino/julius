@@ -23,6 +23,10 @@ namespace Julius.Data.Configurations
             builder.Property(p => p.Status)
                 .IsRequired();
 
+            builder.Property(p => p.BillingDate)
+                .HasDefaultValue(string.Empty)
+                .IsRequired();
+
             builder.Property(p => p.Description)
                 .IsRequired()
                 .HasMaxLength(80);
