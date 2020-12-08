@@ -3,6 +3,6 @@
   Você realmente quer fazer isso?
 </div>
 <div mat-dialog-actions>
-  <button mat-button>Não</button>
-  <button mat-button>Manda bala</button>
+  <button mat-button (click)="onNoClick()">Não</button>
+  <button mat-button [mat-dialog-close]="true" >Manda bala</button>
 </div>

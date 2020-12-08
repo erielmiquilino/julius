@@ -23,5 +23,4 @@ export class ExpenseStatusPipe implements PipeTransform {
   transform(expenseStatus: number): string {
     return this.expenseStatus.find(x => x.value === expenseStatus).description;
   }
-
 }

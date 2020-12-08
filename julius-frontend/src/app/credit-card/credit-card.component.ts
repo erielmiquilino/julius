@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {PaymentActionComponent} from '../payment-action/payment-action.component';
-import {PaymentAction} from '../payment-action/PaymentAction';
+import {PaymentActionComponent} from '../expenses/payment-action/payment-action.component';
+import {PaymentAction} from '../expenses/payment-action/PaymentAction';
 import {AlertComponent} from '../alert/alert.component';
 import {CreditCard} from './credit-card-item/credit-card';
 import {CreditCardItemComponent} from './credit-card-item/credit-card-item.component';

@@ -91,7 +91,7 @@ namespace Julius.Application.Controllers
         }
 
 
-        [HttpGet("")]
+        [HttpPost("PaymentAction")]
         public async Task<ActionResult> PostPaymentAction([FromBody] PaymentActionModel paymentActionModel)
         {
             if (!ModelState.IsValid)
@@ -100,6 +100,24 @@ namespace Julius.Application.Controllers
             try
             {
                 await _service.SavePaymentAction(paymentActionModel);
+
+                return Ok();
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteExpense(Guid id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                await _service.DeleteExpense(id);
 
                 return Ok();
             }

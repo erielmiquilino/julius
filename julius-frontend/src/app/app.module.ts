@@ -15,7 +15,7 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
-import { PaymentActionComponent } from './payment-action/payment-action.component';
+import { PaymentActionComponent } from './expenses/payment-action/payment-action.component';
 import { AlertComponent } from './alert/alert.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { IncomesComponent } from './incomes/incomes.component';

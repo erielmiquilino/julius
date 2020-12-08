@@ -64,6 +64,11 @@ namespace Julius.Service.Services
             await _repository.UpdateAsync(expense);
         }
 
+        public async Task DeleteExpense(Guid id)
+        {
+            await _repository.DeleteAsync(id);
+        }
+
         public async Task<Expense> Post(CreateExpenseModel createExpenseModel)
         {
             var expense = _mapper.Map<Expense>(createExpenseModel);

@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ExpenseItem} from './expense-item';
-import {DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter} from '@angular/material/core';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 export const FORMATS = {
   parse: {

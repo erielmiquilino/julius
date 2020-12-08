@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-alert',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent {
+
+  constructor(public dialogRef: MatDialogRef<AlertComponent>) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

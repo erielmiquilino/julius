@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ExpenseItem} from './expense-item';
+import {PaymentAction} from '../payment-action/PaymentAction';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,13 @@ export class ExpenseService {
 
   public postExpense(expenseItem: ExpenseItem): Observable<any> {
     return this.http.post('http://localhost:62672/api/Expense/AddExpense', expenseItem);
+  }
+
+  public postPaymentAction(paymentAction: PaymentAction): Observable<any> {
+    return this.http.post('http://localhost:62672/api/Expense/PaymentAction', paymentAction);
+  }
+
+  public deleteExpense(id: string): Observable<any> {
+    return this.http.delete(`http://localhost:62672/api/Expense/${id}`);
   }
 }

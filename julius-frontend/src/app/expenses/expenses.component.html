@@ -30,10 +30,10 @@
       <ng-container matColumnDef="action">
         <mat-header-cell  *matHeaderCellDef> Ações </mat-header-cell>
         <mat-cell  *matCellDef="let element">
-          <button (click)="openPaymentActionDialog()" mat-icon-button [disabled]="element.status === 'PAGO'" >
+          <button (click)="openPaymentActionDialog(element.id)" mat-icon-button [disabled]="element.status === 'PAGO'" >
             <mat-icon>payments</mat-icon>
           </button>
-          <button (click)="openAlertDialog()" mat-icon-button>
+          <button (click)="openAlertDialog(element.id)" mat-icon-button>
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>

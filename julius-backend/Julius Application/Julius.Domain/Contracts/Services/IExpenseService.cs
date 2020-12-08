@@ -17,5 +17,7 @@ namespace Julius.Domain.Contracts.Services
         Task<ExpenseModel> Get(Guid id);
 
         Task SavePaymentAction(PaymentActionModel paymentActionModel);
+        
+        Task DeleteExpense(Guid id);
     }
 }

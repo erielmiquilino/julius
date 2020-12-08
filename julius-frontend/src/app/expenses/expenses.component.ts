@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ExpenseItem} from './expense-item/expense-item';
 import {ExpenseItemComponent} from './expense-item/expense-item.component';
-import {PaymentActionComponent} from '../payment-action/payment-action.component';
-import {PaymentAction} from '../payment-action/PaymentAction';
+import {PaymentActionComponent} from './payment-action/payment-action.component';
+import {PaymentAction} from './payment-action/PaymentAction';
 import {AlertComponent} from '../alert/alert.component';
 import {ExpenseService} from './expense-item/expense.service';
 import {Month} from './expense-item/month';
@@ -30,9 +30,7 @@ export class ExpensesComponent implements OnInit {
 
     this.expenseService.getMonths().subscribe(response => {
       this.months = response;
-      this.expenseService.getExpensesByMonthAndYear(response[0].month, response[0].year).subscribe(expenses => {
-        this.dataSource = expenses;
-      });
+      this.LoadData(response);
     });
   }
 
@@ -46,25 +44,37 @@ export class ExpensesComponent implements OnInit {
       expense.month = this.months[0].month;
       expense.year = this.months[0].year;
 
-      this.expenseService.postExpense(expense).subscribe(result => {
-        this.dataSource.push(result);
+      this.expenseService.postExpense(expense).subscribe(() => {
+        this.LoadData(this.months);
       });
     });
   }
 
-  openPaymentActionDialog(): void {
+  openPaymentActionDialog(expenseId: string): void {
     const dialogRef = this.dialog.open(PaymentActionComponent, {
       width: '250px',
-      data: new PaymentAction()
+      data: new PaymentAction(expenseId)
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(paymentAction => {
+      this.expenseService.postPaymentAction(paymentAction).subscribe(() => {
+        this.LoadData(this.months);
+      });
     });
   }
 
-  openAlertDialog(): void {
-    this.dialog.open(AlertComponent, {});
+  openAlertDialog(id: string): void {
+    const dialogRef = this.dialog.open(AlertComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.expenseService.deleteExpense(id).subscribe(() => {
+          this.LoadData(this.months);
+        });
+      }
+    });
   }
 
   spendingForecast(): number {
@@ -75,6 +85,12 @@ export class ExpensesComponent implements OnInit {
   totalPaid(): number {
     // return this.dataSource.reduce((x, {totalPaid}) => x + totalPaid, 0);
     return 0;
+  }
+
+  private LoadData(response): void {
+    this.expenseService.getExpensesByMonthAndYear(response[0].month, response[0].year).subscribe(expenses => {
+      this.dataSource = expenses;
+    });
   }
 }
 
