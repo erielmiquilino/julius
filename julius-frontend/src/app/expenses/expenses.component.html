@@ -25,7 +25,7 @@
       </ng-container>
       <ng-container matColumnDef="status">
         <mat-header-cell  *matHeaderCellDef> Status </mat-header-cell>
-        <mat-cell  *matCellDef="let element"> <strong>{{element.status}}</strong> </mat-cell>
+        <mat-cell  *matCellDef="let element"> <strong>{{element.status | expenseStatus}}</strong> </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">
         <mat-header-cell  *matHeaderCellDef> Ações </mat-header-cell>

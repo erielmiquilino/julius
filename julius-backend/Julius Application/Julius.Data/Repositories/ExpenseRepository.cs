@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Julius.Data.Context;
 using Julius.Data.Repositories.Base;
 using Julius.Domain.Contracts.Repositories;
@@ -35,6 +36,11 @@ namespace Julius.Data.Repositories
 
             return await _mapper.ProjectTo<ExpenseDto>(queryableExpenses)
                 .ToListAsync();
+        }
+
+        public async Task<Expense> SelectById(Guid expenseId)
+        {
+            return await _dbSet.FirstAsync(x => x.Id == expenseId);
         }
     }
 }

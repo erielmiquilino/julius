@@ -90,5 +90,23 @@ namespace Julius.Application.Controllers
             }
         }
 
+
+        [HttpGet("")]
+        public async Task<ActionResult> PostPaymentAction([FromBody] PaymentActionModel paymentActionModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                await _service.SavePaymentAction(paymentActionModel);
+
+                return Ok();
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Julius.Domain.Domains.Base;
 using Julius.Domain.Enums;
+using Julius.Domain.Models;
 
 namespace Julius.Domain.Domains
 {
@@ -20,9 +21,19 @@ namespace Julius.Domain.Domains
 
         public string Year { get; set; }
 
-        public void UpdateExpenseStatus()
+        public void UpdateExpenseStatus(ExpenseStatus expenseStatus)
         {
-            Status = ExpenseStatus.Opened;
+            Status = expenseStatus;
+        }
+
+        public void UpdateByPaymentAction(PaymentActionModel paymentActionModel)
+        {
+            if (paymentActionModel.PaymentValue == TotalValue)
+                UpdateExpenseStatus(ExpenseStatus.Paid);
+            else
+                UpdateExpenseStatus(ExpenseStatus.Partial);
+
+            TotalPaid = paymentActionModel.PaymentValue;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Julius.Common.Extensions;
 using Julius.Domain.Domains;
+using Julius.Domain.Enums;
 
 namespace Julius.Service.Services
 {
@@ -54,11 +55,20 @@ namespace Julius.Service.Services
             return _mapper.Map<ExpenseModel>(entity);
         }
 
+        public async Task SavePaymentAction(PaymentActionModel paymentActionModel)
+        {
+            var expense = await _repository.SelectById(paymentActionModel.ExpenseId);
+
+            expense.UpdateByPaymentAction(paymentActionModel);
+
+            await _repository.UpdateAsync(expense);
+        }
+
         public async Task<Expense> Post(CreateExpenseModel createExpenseModel)
         {
             var expense = _mapper.Map<Expense>(createExpenseModel);
 
-            expense.UpdateExpenseStatus();
+            expense.UpdateExpenseStatus(ExpenseStatus.Opened);
 
             return await _repository.InsertAsync(expense);
         }

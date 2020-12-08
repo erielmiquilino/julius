@@ -25,6 +25,7 @@ import { IncomeItemComponent } from './incomes/income-item/income-item.component
 import { CreditCardItemComponent } from './credit-card/credit-card-item/credit-card-item.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {HttpClientModule} from '@angular/common/http';
+import { ExpenseStatusPipe } from './expenses/expense-status.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {HttpClientModule} from '@angular/common/http';
     IncomesComponent,
     CreditCardComponent,
     IncomeItemComponent,
-    CreditCardItemComponent
+    CreditCardItemComponent,
+    ExpenseStatusPipe
   ],
   imports: [
     BrowserModule,
