@@ -42,5 +42,13 @@ namespace Julius.Data.Repositories
         {
             return await _dbSet.FirstAsync(x => x.Id == expenseId);
         }
+
+        public async Task<IEnumerable<AmountExpenseDto>> SelectAmountByMonthAndYear(string month, string year)
+        {
+            var queryableExpenses = _dbSet.Where(x => x.Month == month && x.Year == year);
+
+            return await _mapper.ProjectTo<AmountExpenseDto>(queryableExpenses)
+                .ToListAsync();
+        }
     }
 }

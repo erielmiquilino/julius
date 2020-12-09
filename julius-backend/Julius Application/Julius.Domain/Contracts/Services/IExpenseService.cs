@@ -2,7 +2,9 @@
 using Julius.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Threading.Tasks;
+using Julius.Domain.DTOs;
 
 namespace Julius.Domain.Contracts.Services
 {
@@ -19,5 +21,7 @@ namespace Julius.Domain.Contracts.Services
         Task SavePaymentAction(PaymentActionModel paymentActionModel);
         
         Task DeleteExpense(Guid id);
+
+        Task<TotalsModel> GetAmountByMonthAndYear(string month, string year);
     }
 }

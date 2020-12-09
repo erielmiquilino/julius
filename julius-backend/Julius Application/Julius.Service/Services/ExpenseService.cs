@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Julius.Common.Extensions;
 using Julius.Domain.Domains;
+using Julius.Domain.DTOs;
 using Julius.Domain.Enums;
 
 namespace Julius.Service.Services
@@ -67,6 +68,24 @@ namespace Julius.Service.Services
         public async Task DeleteExpense(Guid id)
         {
             await _repository.DeleteAsync(id);
+        }
+
+        public async Task<TotalsModel> GetAmountByMonthAndYear(string month, string year)
+        {
+            var amountExpenses = await _repository.SelectAmountByMonthAndYear(month, year);
+            var amountExpensesList = amountExpenses.ToList();
+
+            const decimal totalIncome = 3579.17M;
+            var totalPaid = amountExpensesList.Sum(x => x.TotalPaid);
+            var spendingForecast = amountExpensesList.Sum(x => x.TotalValue);
+            return new TotalsModel()
+            {
+                TotalPaid = totalPaid,
+                SpendingForecast = spendingForecast,
+                CurrentInAccounts = totalIncome - totalPaid,
+                TotalIncome = totalIncome,
+                TotalAvailable = totalIncome - spendingForecast
+            };
         }
 
         public async Task<Expense> Post(CreateExpenseModel createExpenseModel)

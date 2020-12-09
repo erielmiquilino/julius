@@ -13,5 +13,7 @@ namespace Julius.Domain.Contracts.Repositories
         Task<IEnumerable<ExpenseDto>> SelectByMonthAndYear(string month, string year);
 
         Task<Expense> SelectById(Guid expenseId);
+
+        Task<IEnumerable<AmountExpenseDto>> SelectAmountByMonthAndYear(string month, string year);
     }
 }
