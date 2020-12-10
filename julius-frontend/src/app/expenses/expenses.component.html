@@ -47,18 +47,18 @@
 
 <div id="footer">
   <div fxFlex class="container-footer">
-    <div class="content-footer" >Previsão de gastos: {{spendingForecast() | currency:'BRL'}}</div>
+    <div class="content-footer" >Previsão de gastos: {{totals.spendingForecast | currency:'BRL'}}</div>
   </div>
   <div fxFlex class="container-footer">
-    <div class="content-footer" >Total Pago: {{totalPaid() | currency:'BRL'}}</div>
+    <div class="content-footer" >Total Pago: {{totals.totalPaid | currency:'BRL'}}</div>
   </div>
   <div fxFlex class="container-footer">
-    <div class="content-footer" >Total de Receitas: {{totalIncome | currency:'BRL'}}</div>
+    <div class="content-footer" >Total de Receitas: {{totals.totalIncome | currency:'BRL'}}</div>
   </div>
   <div fxFlex class="container-footer">
-    <div class="content-footer" >Disponivel: {{totalIncome - spendingForecast() | currency:'BRL'}}</div>
+    <div class="content-footer" >Disponivel: {{totals.totalAvailable | currency:'BRL'}}</div>
   </div>
   <div fxFlex class="container-footer">
-    <div class="content-footer" >Atual em contas: {{totalIncome - totalPaid() | currency:'BRL'}}</div>
+    <div class="content-footer" >Atual em contas: {{totals.currentInAccounts | currency:'BRL'}}</div>
   </div>
 </div>

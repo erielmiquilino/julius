@@ -44,7 +44,7 @@ export class CreditCardComponent implements OnInit {
   openPaymentActionDialog(): void {
     const dialogRef = this.dialog.open(PaymentActionComponent, {
       width: '250px',
-      data: new PaymentAction()
+      data: new PaymentAction('')
     });
 
     dialogRef.afterClosed().subscribe(result => {

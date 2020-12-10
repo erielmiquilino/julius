@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
+using Julius.Common.Extensions;
 using Julius.Domain.Contracts.Repositories;
 using Julius.Domain.Contracts.Services;
+using Julius.Domain.Domains;
+using Julius.Domain.Enums;
 using Julius.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Julius.Common.Extensions;
-using Julius.Domain.Domains;
-using Julius.Domain.DTOs;
-using Julius.Domain.Enums;
 
 namespace Julius.Service.Services
 {

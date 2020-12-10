@@ -7,6 +7,7 @@ import {PaymentAction} from './payment-action/PaymentAction';
 import {AlertComponent} from '../alert/alert.component';
 import {ExpenseService} from './expense-item/expense.service';
 import {Month} from './expense-item/month';
+import {Totals} from './Totals';
 
 @Component({
   selector: 'app-expenses',
@@ -20,17 +21,18 @@ export class ExpensesComponent implements OnInit {
 
   public displayedColumns: string[] = ['billingDate', 'description', 'totalValue', 'totalPaid', 'status', 'action'];
 
-  public totalIncome = 50000;
-
   public dataSource: ExpenseItem[];
 
   public months: Month[];
 
-  ngOnInit(): void {
+  public totals: Totals;
 
+  ngOnInit(): void {
+    this.totals = new Totals();
     this.expenseService.getMonths().subscribe(response => {
       this.months = response;
       this.LoadData(response);
+      this.LoadTotals(this.months);
     });
   }
 
@@ -46,6 +48,7 @@ export class ExpensesComponent implements OnInit {
 
       this.expenseService.postExpense(expense).subscribe(() => {
         this.LoadData(this.months);
+        this.LoadTotals(this.months);
       });
     });
   }
@@ -59,6 +62,7 @@ export class ExpensesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(paymentAction => {
       this.expenseService.postPaymentAction(paymentAction).subscribe(() => {
         this.LoadData(this.months);
+        this.LoadTotals(this.months);
       });
     });
   }
@@ -72,19 +76,16 @@ export class ExpensesComponent implements OnInit {
       if (result) {
         this.expenseService.deleteExpense(id).subscribe(() => {
           this.LoadData(this.months);
+          this.LoadTotals(this.months);
         });
       }
     });
   }
 
-  spendingForecast(): number {
-    // return this.dataSource.reduce((x, {totalValue}) => x + totalValue, 0);
-    return 0;
-  }
-
-  totalPaid(): number {
-    // return this.dataSource.reduce((x, {totalPaid}) => x + totalPaid, 0);
-    return 0;
+  private LoadTotals(response): void {
+    this.expenseService.getTotalsByMonthAndYear(response[0].month, response[0].year).subscribe(totals => {
+      this.totals = totals;
+    });
   }
 
   private LoadData(response): void {
