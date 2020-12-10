@@ -6,8 +6,6 @@ namespace Julius.Data.Context
 {
     public class JuliusContext : DbContext
     {
-        public DbSet<Expense> Expenses { get; set; }
-
         public JuliusContext(DbContextOptions<JuliusContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

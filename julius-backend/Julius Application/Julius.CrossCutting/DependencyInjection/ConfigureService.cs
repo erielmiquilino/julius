@@ -9,6 +9,7 @@ namespace Julius.CrossCutting.DependencyInjection
         public static void ConfigureDependenciesService(IServiceCollection serviceDescriptors)
         {
             serviceDescriptors.AddTransient<IExpenseService, ExpenseService>();
+            serviceDescriptors.AddTransient<IIncomeService, IncomeService>();
         }
     }
 }
