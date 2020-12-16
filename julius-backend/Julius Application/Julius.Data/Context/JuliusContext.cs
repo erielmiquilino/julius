@@ -12,6 +12,8 @@ namespace Julius.Data.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Expense>(new ExpenseConfiguration().Configure);
+            modelBuilder.Entity<Income>(new IncomeConfiguration().Configure);
+            modelBuilder.Entity<Period>(new PeriodConfiguration().Configure);
         }
     }
 }
