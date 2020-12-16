@@ -36,22 +36,6 @@ namespace Julius.Application.Controllers
             }
         }
 
-        [HttpGet("GetMonths")]
-        public async Task<ActionResult<IEnumerable<MonthModel>>> GetMonthsWithRecords()
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            try
-            {
-                return Ok(await _service.GetMonthsWithRecords());
-            }
-            catch (ArgumentException ex)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
-            }
-        }
-
         [HttpPost("AddExpense")]
         public async Task<ActionResult<Expense>> PostExpense([FromBody] CreateExpenseModel createExpenseModel)
         {

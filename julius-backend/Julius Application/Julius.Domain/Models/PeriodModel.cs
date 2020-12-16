@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Julius.Domain.Models
 {
-    public class MonthModel
+    public class PeriodModel
     {
         public string Month { get; set; }
 

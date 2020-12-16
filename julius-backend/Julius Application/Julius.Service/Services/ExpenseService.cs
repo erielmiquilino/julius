@@ -24,23 +24,6 @@ namespace Julius.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<MonthModel>> GetMonthsWithRecords()
-        {
-            var months = await _repository.GetMonths();
-
-            if (months.Any())
-                return _mapper.Map<IEnumerable<MonthModel>>(months);
-
-            var now = DateTime.Now;
-            var cultureInfo = new CultureInfo("pt-BR");
-
-            return new List<MonthModel>() {new MonthModel()
-            {
-                Year = now.Year.ToString(),
-                Month = now.ToString("MMMM", cultureInfo).FirstCharToUpper()
-            }};
-        }
-
         public async Task<IEnumerable<ExpenseModel>> GetExpensesByMonthAndYear(string month, string year)
         {
             var expenses = await _repository.SelectByMonthAndYear(month, year);

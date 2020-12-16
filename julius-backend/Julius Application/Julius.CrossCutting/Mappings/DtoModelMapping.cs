@@ -8,7 +8,7 @@ namespace Julius.CrossCutting.Mappings
     {
         public DtoModelMapping()
         {
-            CreateMap<MonthDto, MonthModel>()
+            CreateMap<MonthDto, PeriodModel>()
                 .ReverseMap();
 
             CreateMap<ExpenseDto, ExpenseModel>()

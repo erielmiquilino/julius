@@ -8,8 +8,6 @@ namespace Julius.Domain.Contracts.Repositories
 {
     public interface IExpenseRepository : IBaseRepository<Expense>
     {
-        Task<IEnumerable<MonthDto>> GetMonths();
-
         Task<IEnumerable<ExpenseDto>> SelectByMonthAndYear(string month, string year);
 
         Task<Expense> SelectById(Guid expenseId);
