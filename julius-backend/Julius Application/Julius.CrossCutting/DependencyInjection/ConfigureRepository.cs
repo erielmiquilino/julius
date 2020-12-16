@@ -18,6 +18,7 @@ namespace Julius.CrossCutting.DependencyInjection
             serviceDescriptors.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             serviceDescriptors.AddScoped<IExpenseRepository, ExpenseRepository>();
             serviceDescriptors.AddScoped<IIncomeRepository, IncomeRepository>();
+            serviceDescriptors.AddScoped<IPeriodRepository, PeriodRepository>();
         }
     }
 }

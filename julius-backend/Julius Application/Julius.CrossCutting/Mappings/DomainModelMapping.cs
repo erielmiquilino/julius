@@ -13,6 +13,9 @@ namespace Julius.CrossCutting.Mappings
 
             CreateMap<Expense, CreateExpenseModel>()
                 .ReverseMap();
+
+            CreateMap<Period, PeriodModel>()
+                .ReverseMap();
         }
     }
 }

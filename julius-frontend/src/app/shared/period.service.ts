@@ -10,6 +10,6 @@ export class PeriodService {
   constructor(private http: HttpClient) { }
 
   public getPeriods(): Observable<any> {
-    return this.http.get('https://localhost:44300/api/Expense/getPeriods');
+    return this.http.get('https://localhost:44300/api/Period/getPeriods');
   }
 }

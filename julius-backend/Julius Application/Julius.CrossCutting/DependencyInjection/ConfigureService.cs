@@ -10,6 +10,7 @@ namespace Julius.CrossCutting.DependencyInjection
         {
             serviceDescriptors.AddTransient<IExpenseService, ExpenseService>();
             serviceDescriptors.AddTransient<IIncomeService, IncomeService>();
+            serviceDescriptors.AddTransient<IPeriodService, PeriodService>();
         }
     }
 }
