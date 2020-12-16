@@ -24,9 +24,9 @@ namespace Julius.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ExpenseModel>> GetExpensesByMonthAndYear(string month, string year)
+        public async Task<IEnumerable<ExpenseModel>> GetExpensesByPeriodId(Guid periodId)
         {
-            var expenses = await _repository.SelectByMonthAndYear(month, year);
+            var expenses = await _repository.SelectByPeriodId(periodId);
 
             return _mapper.Map<IEnumerable<ExpenseModel>>(expenses);
         }
@@ -52,9 +52,9 @@ namespace Julius.Service.Services
             await _repository.DeleteAsync(id);
         }
 
-        public async Task<TotalsModel> GetAmountByMonthAndYear(string month, string year)
+        public async Task<TotalsModel> GetAmountByPeriodId(Guid periodId)
         {
-            var amountExpenses = await _repository.SelectAmountByMonthAndYear(month, year);
+            var amountExpenses = await _repository.SelectAmountByPeriodId(periodId);
             var amountExpensesList = amountExpenses.ToList();
 
             const decimal totalIncome = 3579.17M;

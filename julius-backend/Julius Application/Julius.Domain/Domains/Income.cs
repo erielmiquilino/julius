@@ -1,4 +1,5 @@
-﻿using Julius.Domain.Domains.Base;
+﻿using System;
+using Julius.Domain.Domains.Base;
 
 namespace Julius.Domain.Domains
 {
@@ -10,8 +11,8 @@ namespace Julius.Domain.Domains
 
         public decimal TotalValue { get; set; }
 
-        public string Month { get; set; }
+        public Guid PeriodId { get; set; }
 
-        public string Year { get; set; }
+        public virtual Period Period { get; set; }
     }
 }

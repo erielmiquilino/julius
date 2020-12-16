@@ -19,15 +19,15 @@ namespace Julius.Application.Controllers
             _service = service;
         }
 
-        [HttpGet("GetIncomesBy/{month}/{year}")]
-        public async Task<ActionResult<IEnumerable<IncomeModel>>> GetExpensesBy(string month, string year)
+        [HttpGet("GetIncomesBy/{periodId}")]
+        public async Task<ActionResult<IEnumerable<IncomeModel>>> GetExpensesBy(Guid periodId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                return Ok(await _service.GetIncomesByMonthAndYear(month, year));
+                return Ok(await _service.GetIncomesByPeriodId(periodId));
             }
             catch (ArgumentException ex)
             {

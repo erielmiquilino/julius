@@ -8,10 +8,10 @@ namespace Julius.Domain.Contracts.Repositories
 {
     public interface IExpenseRepository : IBaseRepository<Expense>
     {
-        Task<IEnumerable<ExpenseDto>> SelectByMonthAndYear(string month, string year);
+        Task<IEnumerable<ExpenseDto>> SelectByPeriodId(Guid periodId);
 
         Task<Expense> SelectById(Guid expenseId);
 
-        Task<IEnumerable<AmountExpenseDto>> SelectAmountByMonthAndYear(string month, string year);
+        Task<IEnumerable<AmountExpenseDto>> SelectAmountByPeriodId(Guid periodId);
     }
 }

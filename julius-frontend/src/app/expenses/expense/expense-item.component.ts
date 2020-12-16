@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ExpenseItem} from './expense-item';
+import {Expense} from './expense';
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 
 export const FORMATS = {
@@ -27,7 +27,7 @@ export class ExpenseItemComponent  {
 
   constructor(
     public dialogRef: MatDialogRef<ExpenseItemComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ExpenseItem) {}
+    @Inject(MAT_DIALOG_DATA) public data: Expense) {}
 
   onNoClick(): void {
     this.dialogRef.close();

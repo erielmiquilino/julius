@@ -1,9 +1,8 @@
-export class ExpenseItem {
+export class Expense {
   billingDate: string;
   description: string;
   totalValue: number;
   totalPaid: number;
   status: string;
-  month: string;
-  year: string;
+  periodId: string;
 }

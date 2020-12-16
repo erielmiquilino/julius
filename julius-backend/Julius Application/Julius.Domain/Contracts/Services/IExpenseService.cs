@@ -8,7 +8,7 @@ namespace Julius.Domain.Contracts.Services
 {
     public interface IExpenseService
     {
-        Task<IEnumerable<ExpenseModel>> GetExpensesByMonthAndYear(string month, string year);
+        Task<IEnumerable<ExpenseModel>> GetExpensesByPeriodId(Guid periodId);
         
         Task<Expense> Post(CreateExpenseModel createExpenseModel);
 
@@ -18,6 +18,6 @@ namespace Julius.Domain.Contracts.Services
         
         Task DeleteExpense(Guid id);
 
-        Task<TotalsModel> GetAmountByMonthAndYear(string month, string year);
+        Task<TotalsModel> GetAmountByPeriodId(Guid periodId);
     }
 }

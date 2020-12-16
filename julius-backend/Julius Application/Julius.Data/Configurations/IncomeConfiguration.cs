@@ -21,10 +21,8 @@ namespace Julius.Data.Configurations
             builder.Property(p => p.TotalValue)
                 .IsRequired();
 
-            builder.Property(p => p.Month)
-                .IsRequired();
-
-            builder.Property(p => p.Year)
+            builder.HasOne(p => p.Period);
+            builder.Property(p => p.PeriodId)
                 .IsRequired();
         }
     }

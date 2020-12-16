@@ -1,5 +1,5 @@
 <mat-tab-group>
-  <mat-tab *ngFor="let month of months" label="{{month.month + ' - ' + month.year}}" >
+  <mat-tab *ngFor="let month of periods" label="{{month.month + ' - ' + month.year}}" >
 
     <button mat-button (click)="openFinancialItemDialog()" >
       Novo

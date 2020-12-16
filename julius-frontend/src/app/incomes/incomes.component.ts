@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ExpenseItem} from '../expenses/expense-item/expense-item';
+import {Expense} from '../expenses/expense/expense';
 import {MatDialog} from '@angular/material/dialog';
 import {AlertComponent} from '../alert/alert.component';
 import {Income} from './income-item/income';
@@ -31,7 +31,7 @@ export class IncomesComponent implements OnInit {
   openFinancialItemDialog(): void {
     const dialogRef = this.dialog.open(IncomeItemComponent, {
       width: '250px',
-      data: new ExpenseItem()
+      data: new Expense()
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -17,9 +17,9 @@ namespace Julius.Domain.Domains
 
         public ExpenseStatus Status { get; set; }
 
-        public string Month { get; set; }
+        public Guid PeriodId { get; set; }
 
-        public string Year { get; set; }
+        public virtual Period Period { get; set; }
 
         public void UpdateExpenseStatus(ExpenseStatus expenseStatus)
         {
@@ -28,10 +28,9 @@ namespace Julius.Domain.Domains
 
         public void UpdateByPaymentAction(PaymentActionModel paymentActionModel)
         {
-            if (paymentActionModel.PaymentValue == TotalValue)
-                UpdateExpenseStatus(ExpenseStatus.Paid);
-            else
-                UpdateExpenseStatus(ExpenseStatus.Partial);
+            UpdateExpenseStatus(paymentActionModel.PaymentValue == TotalValue
+                ? ExpenseStatus.Paid
+                : ExpenseStatus.Partial);
 
             TotalPaid = paymentActionModel.PaymentValue;
         }

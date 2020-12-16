@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {ExpenseItem} from './expense-item/expense-item';
-import {ExpenseItemComponent} from './expense-item/expense-item.component';
+import {Expense} from './expense/expense';
+import {ExpenseItemComponent} from './expense/expense-item.component';
 import {PaymentActionComponent} from './payment-action/payment-action.component';
 import {PaymentAction} from './payment-action/PaymentAction';
 import {AlertComponent} from '../alert/alert.component';
-import {ExpenseService} from './expense-item/expense.service';
-import {Month} from './expense-item/month';
+import {ExpenseService} from './expense/expense.service';
+import {Period} from '../shared/period';
 import {Totals} from './Totals';
+import {PeriodService} from '../shared/period.service';
 
 @Component({
   selector: 'app-expenses',
@@ -17,38 +18,41 @@ import {Totals} from './Totals';
 export class ExpensesComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
-              public expenseService: ExpenseService) {}
+              public expenseService: ExpenseService,
+              public periodService: PeriodService) {}
 
   public displayedColumns: string[] = ['billingDate', 'description', 'totalValue', 'totalPaid', 'status', 'action'];
 
-  public dataSource: ExpenseItem[];
+  public dataSource: Expense[];
 
-  public months: Month[];
+  public periods: Period[];
+  public selectedPeriod: Period;
 
   public totals: Totals;
 
   ngOnInit(): void {
     this.totals = new Totals();
-    this.expenseService.getMonths().subscribe(response => {
-      this.months = response;
-      this.LoadData(response);
-      this.LoadTotals(this.months);
+    this.periodService.getPeriods().subscribe(response => {
+      this.periods = response;
+      this.selectedPeriod = response[0];
+      this.LoadData(this.selectedPeriod.id);
+      this.LoadTotals(this.selectedPeriod.id);
     });
   }
 
   openFinancialItemDialog(): void {
     const dialogRef = this.dialog.open(ExpenseItemComponent, {
       width: '250px',
-      data: new ExpenseItem()
+      data: new Expense()
     });
 
     dialogRef.afterClosed().subscribe(expense => {
-      expense.month = this.months[0].month;
-      expense.year = this.months[0].year;
+      expense.month = this.periods[0].month;
+      expense.year = this.periods[0].year;
 
       this.expenseService.postExpense(expense).subscribe(() => {
-        this.LoadData(this.months);
-        this.LoadTotals(this.months);
+        this.LoadData(this.selectedPeriod.id);
+        this.LoadTotals(this.selectedPeriod.id);
       });
     });
   }
@@ -61,8 +65,8 @@ export class ExpensesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(paymentAction => {
       this.expenseService.postPaymentAction(paymentAction).subscribe(() => {
-        this.LoadData(this.months);
-        this.LoadTotals(this.months);
+        this.LoadData(this.selectedPeriod.id);
+        this.LoadTotals(this.selectedPeriod.id);
       });
     });
   }
@@ -75,21 +79,21 @@ export class ExpensesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.expenseService.deleteExpense(id).subscribe(() => {
-          this.LoadData(this.months);
-          this.LoadTotals(this.months);
+          this.LoadData(this.selectedPeriod.id);
+          this.LoadTotals(this.selectedPeriod.id);
         });
       }
     });
   }
 
-  private LoadTotals(response): void {
-    this.expenseService.getTotalsByMonthAndYear(response[0].month, response[0].year).subscribe(totals => {
+  private LoadTotals(periodId: string): void {
+    this.expenseService.getTotalsByMonthAndYear(periodId).subscribe(totals => {
       this.totals = totals;
     });
   }
 
-  private LoadData(response): void {
-    this.expenseService.getExpensesByMonthAndYear(response[0].month, response[0].year).subscribe(expenses => {
+  private LoadData(periodId: string): void {
+    this.expenseService.getExpensesByMonthAndYear(periodId).subscribe(expenses => {
       this.dataSource = expenses;
     });
   }

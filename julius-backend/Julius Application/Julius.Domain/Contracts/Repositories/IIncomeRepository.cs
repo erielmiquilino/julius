@@ -9,6 +9,6 @@ namespace Julius.Domain.Contracts.Repositories
 {
     public interface IIncomeRepository : IBaseRepository<Income>
     {
-        Task<IEnumerable<IncomeDto>> SelectByMonthAndYear(string month, string year);
+        Task<IEnumerable<IncomeDto>> SelectByPeriodId(Guid periodId);
     }
 }

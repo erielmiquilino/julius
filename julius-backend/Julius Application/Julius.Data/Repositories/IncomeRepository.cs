@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Julius.Data.Context;
 using Julius.Data.Repositories.Base;
 using Julius.Domain.Contracts.Repositories;
@@ -22,9 +23,9 @@ namespace Julius.Data.Repositories
             _dbSet = context.Set<Income>();
         }
 
-        public async Task<IEnumerable<IncomeDto>> SelectByMonthAndYear(string month, string year)
+        public async Task<IEnumerable<IncomeDto>> SelectByPeriodId(Guid periodId)
         {
-            var queryableIncomes = _dbSet.Where(x => x.Month == month && x.Year == year)
+            var queryableIncomes = _dbSet.Where(x => x.PeriodId == periodId)
                 .OrderBy(x => x.InsertDateTime);
 
             return await _mapper.ProjectTo<IncomeDto>(queryableIncomes)

@@ -31,10 +31,8 @@ namespace Julius.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(80);
 
-            builder.Property(p => p.Month)
-                .IsRequired();
-
-            builder.Property(p => p.Year)
+            builder.HasOne(p => p.Period);
+            builder.Property(p => p.PeriodId)
                 .IsRequired();
         }
     }

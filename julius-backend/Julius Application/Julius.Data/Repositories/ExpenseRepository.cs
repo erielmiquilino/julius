@@ -30,9 +30,9 @@ namespace Julius.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ExpenseDto>> SelectByMonthAndYear(string month, string year)
+        public async Task<IEnumerable<ExpenseDto>> SelectByPeriodId(Guid periodId)
         {
-            var queryableExpenses = _dbSet.Where(x => x.Month == month && x.Year == year)
+            var queryableExpenses = _dbSet.Where(x => x.PeriodId == periodId)
                 .OrderBy(x => x.InsertDateTime);
 
             return await _mapper.ProjectTo<ExpenseDto>(queryableExpenses)
@@ -44,9 +44,9 @@ namespace Julius.Data.Repositories
             return await _dbSet.FirstAsync(x => x.Id == expenseId);
         }
 
-        public async Task<IEnumerable<AmountExpenseDto>> SelectAmountByMonthAndYear(string month, string year)
+        public async Task<IEnumerable<AmountExpenseDto>> SelectAmountByPeriodId(Guid periodId)
         {
-            var queryableExpenses = _dbSet.Where(x => x.Month == month && x.Year == year);
+            var queryableExpenses = _dbSet.Where(x => x.PeriodId == periodId);
 
             return await _mapper.ProjectTo<AmountExpenseDto>(queryableExpenses)
                 .ToListAsync();

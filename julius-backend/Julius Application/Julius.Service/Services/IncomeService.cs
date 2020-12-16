@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Julius.Domain.Contracts.Repositories;
 using Julius.Domain.Contracts.Services;
 using Julius.Domain.Models;
@@ -18,9 +19,9 @@ namespace Julius.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<IncomeModel>> GetIncomesByMonthAndYear(string month, string year)
+        public async Task<IEnumerable<IncomeModel>> GetIncomesByPeriodId(Guid periodId)
         {
-            var incomes = await _repository.SelectByMonthAndYear(month, year);
+            var incomes = await _repository.SelectByPeriodId(periodId);
 
             return _mapper.Map<IEnumerable<IncomeModel>>(incomes);
         }
